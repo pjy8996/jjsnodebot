@@ -158,6 +158,47 @@ client.on('message', (message) => {
         })
         .catch(console.error)
     }
+  } else if(message.content.startsWith('!강퇴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+    
+    message.member.guild.members.find(x => x.id == userId).kick(kick_msg)
+  } else if(message.content.startsWith('!밴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+
+    message.member.guild.members.find(x => x.id == userId).ban(kick_msg)
+  } else if(message.content.startsWith('!주사위')) {
+    let min = 1;
+    let max = 6;
+    let dice_num = parseInt(Math.random() * (max - min) + min);
+    return message.reply(`${dice_num}가 나왔습니다.`);
+  } else if(message.content.startsWith('!야')) {
+    let arr = [
+      '왜',
+      '뭐',
+      '뭠마',
+    ]
+    let min = 0;
+    let max = arr.length;
+    let index = parseInt(Math.random() * (max - min) + min);
+    return message.reply(`${arr[index]}가 나왔습니다.`);
   }
 });
 
@@ -181,14 +222,83 @@ function changeCommandStringLength(str, limitLen = 8) {
   return tmp;
 }
 
-async function AutoMsgDelete(message, str, delay = 7000) {
+async function AutoMsgDelete(message, str, delay = 3000) {
   let msg = await message.channel.send(str);
 
   setTimeout(() => {
     msg.delete();
   }, delay);
 }
-//===================청소명령어끝===================
+
+function getEmbedFields(message, modify=false) {
+  if(message.content == '' && message.embeds.length > 0) {
+    let e = message.embeds[0].fields;
+    let a = [];
+
+    for(let i=0;i<e.length;i++) {
+        a.push(`\`${e[i].name}\` - \`${e[i].value}\`\n`);
+    }
+
+    return a.join('');
+  } else if(modify) {
+    return message.author.lastMessage.content;
+  } else {
+    return message.content;
+  }
+}
+
+function MessageSave(message, modify=false) {
+  imgs = []
+  if (message.attachments.array().length > 0) {
+    message.attachments.array().forEach(x => {
+      imgs.push(x.url+'\n')
+    });
+  }
+
+  username = message.author.username.match(/[\u3131-\uD79D^a-zA-Z^0-9]/ugi)
+  channelName = message.channel.type != 'dm' ? message.channel.name : ''
+  try {
+    username = username.length > 1 ? username.join('') : username
+  } catch (error) {}
+
+  try {
+    channelName = channelName.length > 1 ? channelName.join('') : channelName
+  } catch (error) {}
+
+  var s = {
+    ChannelType: message.channel.type,
+    ChannelId: message.channel.type != 'dm' ? message.channel.id : '',
+    ChannelName: channelName,
+    GuildId: message.channel.type != 'dm' ? message.channel.guild.id : '',
+    GuildName: message.channel.type != 'dm' ? message.channel.guild.name : '',
+    Message: getEmbedFields(message, modify),
+    AuthorId: message.author.id,
+    AuthorUsername: username + '#' + message.author.discriminator,
+    AuthorBot: Number(message.author.bot),
+    Embed: Number(message.embeds.length > 0), // 0이면 false 인거다.
+    CreateTime: momenttz().tz('Asia/Seoul').locale('ko').format('ll dddd LTS')
+  }
+
+  s.Message = (modify ? '[수정됨] ' : '') + imgs.join('') + s.Message
+
+  MessageAdd(
+    s.ChannelType,
+    s.ChannelId,
+    s.ChannelName,
+    s.GuildId,
+    s.GuildName,
+    s.Message,
+    s.AuthorId,
+    s.AuthorUsername,
+    s.AuthorBot,
+    s.Embed,
+    s.CreateTime,
+  )
+    // .then((res) => {
+    //   console.log('db 저장을 했다.', res);
+    // })
+    .catch(error => console.log(error))
+}
 
 
 client.login(token);
