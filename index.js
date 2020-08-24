@@ -154,7 +154,7 @@ client.on('message', (message) => {
     } else {
       message.channel.bulkDelete(parseInt(clearLine)+1)
         .then(() => {
-          AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "**개의 메시지를 삭제했습니다** __[이 메세지는 잠시 후에 사라집니다]__");
+          AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "**개의 메시지를 삭제했습니다** __[이 메세지는 7초 후에 사라집니다]__");
         })
         .catch(console.error)
     }
@@ -181,7 +181,7 @@ function changeCommandStringLength(str, limitLen = 8) {
   return tmp;
 }
 
-async function AutoMsgDelete(message, str, delay = 3000) {
+async function AutoMsgDelete(message, str, delay = 7000) {
   let msg = await message.channel.send(str);
 
   setTimeout(() => {
