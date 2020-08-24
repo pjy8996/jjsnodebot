@@ -122,39 +122,6 @@ client.on('message', (message) => {
 
 
 
-//===================투표===================
-if(message.content.startsWith("!투표")) {
-  let args = message.content.split(" ") // ["!투표", "항목1/항목2/항목3", "시간(초)"]
-  let list = args[1].split("/") // ["항목1", "항목2", "항목3"]
-  let emojis = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"]
-  let tempString = ""
-  let temp = 0
-  if(!args) message.reply("`!투표 [항목1/항목2/항목3] 시간(1초 이상)` 이 올바른 명령어 입니다.")
-  if(!args[2] || args[2] < 1) message.reply("`!투표 [항목1/항목2/항목3] 시간(1초 이상)` 이 올바른 명령어 입니다.")
-  if(list > 5) message.reply("항목은 최대 5개까지 가능합니다.")
-  let embed = new Discord.MessageEmbed()
-  embed.setTitle(`${message.member.displayName}님의 투표`)
-      for(let i=0; i<list.length; i++) {
-          temp += 1
-          tempString += `**${temp}. ${list[i]}**\n`
-      }
-  embed.setDescription(tempString)
-  embed.setFooter(`투표시간: ${args[2]}초`)
-  console.log('전송')
-  message.channel.send({ embed: embed }).then(msg => {
-      for(let i=0; i<list.length; i++) {
-          msg.react(emojis[i])
-      }
-      setTimeout(function() {
-          msg.edit(`<@!${message.author.id}> 투표가 종료되었습니다.`, { embed: embed })
-          console.log('종료')
-      }, parseInt(args[2])*1000)
-  })
-}
-//===================투표 끝===================
-
-
-
 //===================청소명령어===================
   if(message.content.startsWith('!청소')) {
     if(checkPermission(message)) return
