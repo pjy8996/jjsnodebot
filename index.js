@@ -1,12 +1,10 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const token = process.argv.length == 2 ? process.env.token : "";
-const moment = require("moment");
-require("moment-duration-format");
-const welcomeChannelName = "안녕하세요";
-const byeChannelName = "안녕히가세요";
-const welcomeChannelComment = "어서오세요.";
-const byeChannelComment = "안녕히가세요.";
+const token = process.env.token;
+const welcomeChannelName = "🔰디스코드🔰";
+const byeChannelName = "🔰디스코드🔰";
+const welcomeChannelComment = "님! 안녕하세요!\n**사무트서버 디스코드에 오신것을 환영합니다!**\n**원할한 서버이용을 위해서**\n**인증채널에서 인증하신후 이용해주세요!**";
+const byeChannelComment = "**님 안녕히 가세요.. 다음에 또뵈요!**";
 
 client.on('ready', () => {
   console.log('켰다.');
@@ -18,8 +16,6 @@ client.on("guildMemberAdd", (member) => {
   const welcomeChannel = guild.channels.find(channel => channel.name == welcomeChannelName);
 
   welcomeChannel.send(`<@${newUser.id}> ${welcomeChannelComment}\n`);
-
-  member.addRole(guild.roles.find(role => role.name == "게스트"));
 });
 
 client.on("guildMemberRemove", (member) => {
@@ -31,8 +27,6 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.on('message', (message) => {
-  if(message.author.bot) return;
-
   if(message.content === 'ping') {
     message.reply('pong');
   }
