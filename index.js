@@ -17,6 +17,25 @@ client.on('ready', () => {
 //===================봇실행 로그 끝===================
 
 
+  client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
+
+  let state_list = ['과학서버봇','과학서버에 오신것을 환영합니다','반드시규칙을읽어주세요',]
+  let state_list_index = 1;
+  let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
+
+  function changeState() {
+    setTimeout(() => {
+      console.log( '상태 변경 -> ', state_list[state_list_index] );
+      client.user.setPresence({ game: { name: state_list[state_list_index] }, status: 'online' })
+      state_list_index += 1;
+      if(state_list_index >= state_list.length) {
+        state_list_index = 0;
+      }
+      changeState()
+    }, change_delay);
+  }
+
+  changeState();
 
 //===================입장역할지급===================
 client.on("guildMemberAdd", (member) => {
