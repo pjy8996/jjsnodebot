@@ -13,10 +13,6 @@ const byeChannelComment = "**님 안녕히 가세요.. 다음에 또뵈요!**";
 //===================봇실행 로그===================
 client.on('ready', () => {
   console.log('켰다.');
-});
-//===================봇실행 로그 끝===================
-
-
   client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
 
   let state_list = ['과학서버봇','과학서버에 오신것을 환영합니다','반드시규칙을읽어주세요',]
@@ -36,6 +32,7 @@ client.on('ready', () => {
   }
 
   changeState();
+});
 
 //===================입장역할지급===================
 client.on("guildMemberAdd", (member) => {
