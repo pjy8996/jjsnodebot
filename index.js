@@ -2,6 +2,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.env.token;
+const moment = require("moment");
+require("moment-duration-format");
+const momenttz = require('moment-timezone');
 const welcomeChannelName = "🔰디스코드🔰";
 const byeChannelName = "🔰디스코드🔰";
 const welcomeChannelComment = "**님! 안녕하세요!\n**과학서버 디스코드에 오신것을 환영합니다!**\n**원할한 서버이용을 위해서**\n**인증채널에서 인증하신후 이용해주세요!**";
@@ -15,7 +18,11 @@ client.on('ready', () => {
   console.log('켰다.');
   client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
 
-  let state_list = ['과학서버봇','과학서버에 오신것을 환영합니다','반드시규칙을읽어주세요',]
+  let state_list = [
+    'SCP SL 과학서버봇 "과학이"',
+    '반드시규칙을 숙지해주세요!',
+    '오늘도 좋은하루~!',
+  ]
   let state_list_index = 1;
   let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
 
