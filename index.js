@@ -18,11 +18,7 @@ client.on('ready', () => {
   console.log('켰다.');
   client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
 
-  let state_list = [
-    'SCP SL 과학서버봇 "과학이"',
-    '반드시규칙을 숙지해주세요!',
-    '오늘도 좋은하루~!',
-  ]
+  let state_list = [    '과학서버봇 과학이!',    '규칙을 숙지해 주세요!',    '오늘도 좋은하루~!',  ]
   let state_list_index = 1;
   let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
 
