@@ -44,10 +44,10 @@ client.on("guildMemberRemove", (member) => {
 client.on('message', (message) => {
   if(message.author.bot) return;
 
-  if(message.content.startsWith("!지워")) {
-    message.delete()
- }
-  
+  if(message.content.startsWith("시발")) {
+    return message.reply('욕설로인한 메세지삭제')
+     message.delete()
+  }
   if(message.content == 'ping') {
     return message.reply('pong');
   }
@@ -56,6 +56,7 @@ client.on('message', (message) => {
 
 
 //===================임베드===================
+
   if(message.content == 'embed') {
     let img = 'https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256';
     let embed = new Discord.RichEmbed()
@@ -96,18 +97,8 @@ client.on('message', (message) => {
     embed.addField('Commands: ', commandStr);
 
     message.channel.send(embed)
-    
   }
 //===================임베드 끝===================
-
-
-
-let muterole = member.guild.roles.find(r => r.name == "Muted");
-let isMuted = member._roles.find(x => x == muterole.id);
-if(isMuted) {
-    member.ban('뮤트역할이 있는 채로 퇴장하여 서버차단조취가 이루어졌습니다')
-    banAlertChannel.send(`${member.user}님이 ${muterole}먹은 상태에서 퇴장하여 밴먹었습니다.`);
-}
 
 
 
@@ -200,126 +191,6 @@ if(isMuted) {
     return message.reply(`${dice_num}가 나왔습니다.`);
   } else if(message.content.startsWith('!복권')) {
     let arr = [
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
-      '실패',
       '실패',
       '실패',
       '실패',
