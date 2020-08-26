@@ -2,6 +2,10 @@
 const Discord = require('discord.js');    //디스코드.js지정
 const client = new Discord.Client();    //클라이언트지정
 const token = process.env.token;     //토큰
+const moment = require("moment");
+require("moment-duration-format");
+const momenttz = require('moment-timezone');
+const MessageAdd = require('./db/message_add.js')
 //=========================봇구동세팅=========================//
 
 
