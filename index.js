@@ -15,7 +15,7 @@ const byeChannelComment = "**님 안녕히 가세요.. 다음에 또뵈요!**"; 
 
 client.on('ready', () => {
   console.log('과학이 상태 ON!');
-  client.user.setPresence({ game: { name: '과학서버봇 과학이!' }, status: 'online' })
+  client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
 
   let state_list = [
     '과학서버봇 과학이!',
