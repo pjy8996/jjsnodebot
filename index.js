@@ -180,7 +180,7 @@ client.on('message', (message) => {
       var isNum = !isNaN(clearLine)
   
       if(isNum && (clearLine <= 0 || 100 < clearLine)) {
-        message.channel.send("**1 ~ 99 까지의 메세지를 청소할수 있습니다!**")
+        message.channel.send("**1 ~ 99 까지의 메세지를 청소할 수 있습니다!**")
         return;
       } else if(!isNum) { // c @나긋해 3
         if(message.content.split('<@').length == 2) {
@@ -206,18 +206,58 @@ client.on('message', (message) => {
             AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "** 개의 메시지를 삭제했습니다!** - [이 메세지는 3초 후에 사라집니다]");
           })
           .catch(console.error)
-      }
     }
-  });
-  
-  function checkPermission(message) {
-    if(!message.member.hasPermission("MANAGE_MESSAGES")) {
-      message.channel.send(`<@${message.author.id}> ` + "명령어를 수행할 관리자 권한을 소지하고 있지않습니다.")
-      return true;
-    } else {
-      return false;
+  } else if(message.content.startsWith('!강퇴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
     }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+    
+    message.member.guild.members.find(x => x.id == userId).kick(kick_msg)
+  } else if(message.content.startsWith('!밴')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    console.log(message.mentions);
+
+    let userId = message.mentions.users.first().id;
+    let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
+
+    message.member.guild.members.find(x => x.id == userId).ban(kick_msg)
+  } else if(message.content.startsWith('!주사위')) {
+    let min = 1;
+    let max = 6;
+    let dice_num = parseInt(Math.random() * (max - min) + min);
+    return message.reply(`${dice_num}가 나왔습니다.`);
+  } else if(message.content.startsWith('과학아')) {
+    let arr = [
+      '왜',
+      '뭐',
+      '?',
+    ]
+    let min = 0;
+    let max = arr.length;
+    let index = parseInt(Math.random() * (max - min) + min);
   }
+});
+
+function checkPermission(message) {
+  if(!message.member.hasPermission("MANAGE_MESSAGES")) {
+    message.channel.send(`<@${message.author.id}> ` + "명령어를 수행할 관리자 권한을 소지하고 있지않습니다.")
+    return true;
+  } else {
+    return false;
+  }
+}
   
   function changeCommandStringLength(str, limitLen = 8) {
     let tmp = str;
