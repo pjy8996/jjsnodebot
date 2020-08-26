@@ -180,7 +180,7 @@ client.on('message', (message) => {
       var isNum = !isNaN(clearLine)
   
       if(isNum && (clearLine <= 0 || 100 < clearLine)) {
-        message.channel.send("**1 ~ 99 까지 메세지청소가 가능합니다!**")
+        message.channel.send("**1 ~ 99 까지의 메세지를 청소할수 있습니다!**")
         return;
       } else if(!isNum) { // c @나긋해 3
         if(message.content.split('<@').length == 2) {
