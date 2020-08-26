@@ -2,10 +2,6 @@
 const Discord = require('discord.js');    //디스코드.js지정
 const client = new Discord.Client();    //클라이언트지정
 const token = process.env.token;     //토큰
-const moment = require("moment");
-require("moment-duration-format");
-const momenttz = require('moment-timezone');
-const MessageAdd = require('./db/message_add.js')
 //=========================봇구동세팅=========================//
 
 
@@ -64,23 +60,11 @@ client.on("guildMemberRemove", (member) => {
 });
 //=========================입장역할지급=========================//
 
-client.on("messageUpdate", (message) => {
-  MessageSave(message, true)
-});
-
-client.on('message', (message) => {
-  MessageSave(message)
-  if(message.author.bot) return;
-
-  if(message.channel.type == 'dm') {
-    if(message.author.id == adminUserId) return;
-
-    /* not use embed */
-    let msg = message.author+'이(가) 메세지를 보냈습니다.\n'+message.content;
-    client.users.find(x => x.id == adminUserId).send(msg)
-  }
 
 //=========================단순자동응답=========================//
+client.on('message', (message) => {
+  if(message.author.bot) return;
+
   if(message.content.startsWith('!역할추가')) {
     if(message.channel.type == 'dm') {
       return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
