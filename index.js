@@ -238,11 +238,14 @@ client.on('message', (message) => {
     let max = 6;
     let dice_num = parseInt(Math.random() * (max - min) + min);
     return message.reply(`${dice_num}가 나왔습니다.`);
-  } else if(message.content.startsWith('과학아')) {
+  } else if(message.content.startsWith('과학이')) {
     let arr = [
       '왜',
       '뭐',
       '?',
+      '저리가',
+      '훠이훠이',
+      '(자는중)',
     ]
     let min = 0;
     let max = arr.length;
