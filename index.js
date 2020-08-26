@@ -217,7 +217,7 @@ client.on('message', (message) => {
     if(message.content.startsWith(".뮤트")) {
       if(message.member.hasPermission("MANAGE_MESSAGE")) { // 메세지 관리 권한
         let user = message.mentions.members.first()
-        let mute = message.guild.roles.cache.find(r => r.id === '역할 아이디').id
+        let mute = message.guild.roles.cache.find(r => r.id === 'Muted').id
         if(!user) return message.reply(".뮤트 @멘션")
         user.roles.add(mute).then(member => {
           message.channel.send(`${member.displayName} 에게 뮤트를 먹였습니다.`)
@@ -228,7 +228,7 @@ client.on('message', (message) => {
         message.reply("권한이 없습니다.") 
       } 
     }
-    
+
   } else if(message.content.startsWith('!강퇴')) {
     if(message.channel.type == 'dm') {
       return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
