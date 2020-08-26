@@ -372,5 +372,13 @@ function checkPermission(message) {
       // })
       .catch(error => console.log(error))
   }  
+
+
+  let muterole = member.guild.roles.find(r => r.name == "Muted");
+  let isMuted = member._roles.find(x => x == muterole.id);
+  if(isMuted) {
+      member.ban('뮤트역할을 받은채 서버퇴장으로 차단되었습니다')
+      banAlertChannel.send(`${member.user}님이 ${muterole}역할을 받은채 서버퇴장으로 차단되었습니다`);
+  }
   
   client.login(token);
