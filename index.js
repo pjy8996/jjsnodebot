@@ -203,7 +203,7 @@ client.on('message', (message) => {
       } else {
         message.channel.bulkDelete(parseInt(clearLine)+1)
           .then(() => {
-            AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "** 개의 메시지를 삭제했습니다!** - [이 메세지는 5초 후에 사라집니다]");
+            AutoMsgDelete(message, `<@${message.author.id}> ` + parseInt(clearLine) + "** 개의 메시지를 삭제했습니다!** - [이 메세지는 3초 후에 사라집니다]");
           })
           .catch(console.error)
       }
@@ -230,7 +230,7 @@ client.on('message', (message) => {
     return tmp;
   }
   
-  async function AutoMsgDelete(message, str, delay = 5000) {
+  async function AutoMsgDelete(message, str, delay = 3000) {
     let msg = await message.channel.send(str);
   
     setTimeout(() => {
