@@ -58,13 +58,10 @@ client.on("guildMemberRemove", (member) => {
   byeChannel.send(`<@${deleteUser.id}> ${byeChannelComment}\n`);
 });
 
-client.on("messageUpdate", (message) => {
-  MessageSave(message, true)
-});
-
 client.on('message', (message) => {
   MessageSave(message)
   if(message.author.bot) return;
+
 
   if(message.content == 'ping') {
     return message.reply('pong');
