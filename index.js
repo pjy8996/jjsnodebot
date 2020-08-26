@@ -248,6 +248,16 @@ client.on('message', (message) => {
     let max = arr.length;
     let index = parseInt(Math.random() * (max - min) + min);
     return message.reply(`${arr[index]}`);
+  } else if(message.content.startsWith('과학아 죽어')) {
+    let arr = [
+      '못죽어',
+      '솔선수범',
+      '?',
+    ]
+    let min = 0;
+    let max = arr.length;
+    let index = parseInt(Math.random() * (max - min) + min);
+    return message.reply(`${arr[index]}`);
   }
 });
 
