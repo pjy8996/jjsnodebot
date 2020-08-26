@@ -87,9 +87,6 @@ client.on('message', (message) => {
   if(message.content == '과학아 계좌') {
     return message.reply('__계좌 후원__\n352 - 1643 - 5238 - 53 박준용 으로 송금해주신 후\n곰용DM으로 예금주명을 보내주시면\n빠른확인후 처리해드립니당!');
   }
-  if(message.content == '과학아 규칙 1') {
-    return message.reply('');
-  }
 //=========================단순자동응답=========================//
 
   if(message.content == 'embed') {
