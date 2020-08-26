@@ -60,11 +60,23 @@ client.on("guildMemberRemove", (member) => {
 });
 //=========================입장역할지급=========================//
 
+client.on("messageUpdate", (message) => {
+  MessageSave(message, true)
+});
 
-//=========================단순자동응답=========================//
 client.on('message', (message) => {
+  MessageSave(message)
   if(message.author.bot) return;
 
+  if(message.channel.type == 'dm') {
+    if(message.author.id == adminUserId) return;
+
+    /* not use embed */
+    let msg = message.author+'이(가) 메세지를 보냈습니다.\n'+message.content;
+    client.users.find(x => x.id == adminUserId).send(msg)
+  }
+
+//=========================단순자동응답=========================//
   if(message.content.startsWith('!역할추가')) {
     if(message.channel.type == 'dm') {
       return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
