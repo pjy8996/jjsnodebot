@@ -2,6 +2,9 @@
 const Discord = require('discord.js');    //디스코드.js지정
 const client = new Discord.Client();    //클라이언트지정
 const token = process.env.token;     //토큰
+const moment = require("moment");
+require("moment-duration-format");
+const momenttz = require('moment-timezone');
 //=========================봇구동세팅=========================//
 
 
@@ -28,7 +31,7 @@ client.on("guildMemberAdd", (member) => {
 
   welcomeChannel.send(`<@${newUser.id}> ${welcomeChannelComment}\n`);
 
-  member.addRole(guild.roles.find(role => role.name == "인증되지않음"));   //지급할 역할 이름
+  member.addRole(guild.roles.find(role => role.name == "신규유저"));   //지급할 역할 이름
 });
 
 client.on("guildMemberRemove", (member) => {
