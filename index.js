@@ -65,14 +65,30 @@ client.on("guildMemberRemove", (member) => {
 client.on('message', (message) => {
   if(message.author.bot) return;
 
+  if(message.content.startsWith('!역할추가')) {
+    if(message.channel.type == 'dm') {
+      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
+    }
+    if(message.channel.type != 'dm' && checkPermission(message)) return
+
+    if(message.content.split('<@').length == 3) {
+      if(message.content.split(' ').length != 3) return;
+
+      var userId = message.content.split(' ')[1].match(/[\u3131-\uD79D^a-zA-Z^0-9]/ugi).join('')
+      var role = message.content.split(' ')[2].match(/[\u3131-\uD79D^a-zA-Z^0-9]/ugi).join('')
+
+      message.member.guild.members.find(x => x.id == userId).addRole(role);
+    }
+  }
+
   if(message.content == '과학아 문상') {
     return message.reply('__문화상품권 후원__\n레온하트 DM으로 핀번호를 보내주시면\n최대한 빨리 확인후 처리해드립니당!');
   }
   if(message.content == '과학아 계좌') {
     return message.reply('__계좌 후원__\n352 - 1643 - 5238 - 53 박준용 으로 송금해주신 후\n곰용DM으로 예금주명을 보내주시면\n빠른확인후 처리해드립니당!');
   }
-  if(message.content == 'ping') {
-    return message.reply('pong');
+  if(message.content == '과학아 규칙 1') {
+    return message.reply('');
   }
 //=========================단순자동응답=========================//
 
@@ -214,11 +230,11 @@ client.on('message', (message) => {
           .catch(console.error)
     }
 
-    if(message.content.startsWith("과학아뮤트")) {
+    if(message.content.startsWith("!뮤트")) {
       if(message.member.hasPermission("MANAGE_MESSAGE")) { // 메세지 관리 권한
         let user = message.mentions.members.first()
         let mute = message.guild.roles.find(r => r.id === 'Muted')
-        if(!user) return message.reply("과학아뮤트 @멘션")
+        if(!user) return message.reply("!뮤트 @멘션")
         user.addRole(mute).then(member => {
           message.channel.send(`${member.displayName} 에게 뮤트를 먹였습니다.`)
         }).catch(() => {
