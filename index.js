@@ -1,15 +1,26 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-const token = process.env.token;
-const welcomeChannelName = "안녕하세요";
-const byeChannelName = "안녕히가세요";
-const welcomeChannelComment = "어서오세요.";
-const byeChannelComment = "안녕히가세요.";
+//=========================봇구동세팅=========================//
+const Discord = require('discord.js');    //디스코드.js지정
+const client = new Discord.Client();    //클라이언트지정
+const token = process.env.token;     //토큰
+//=========================봇구동세팅=========================//
 
+
+//=========================입퇴장메세지=========================//
+const welcomeChannelName = "🔰디스코드🔰";   //채널지정
+const byeChannelName = "🔰디스코드🔰";     //채널지정
+const welcomeChannelComment = "**님! 안녕하세요!\n**과학서버 디스코드에 오신것을 환영합니다!**\n**원할한 서버이용을 위해서**\n**인증채널에서 인증하신후 이용해주세요!**";  //입장메세지
+const byeChannelComment = "**님 안녕히 가세요.. 다음에 또뵈요!**";   //퇴장메세지
+//=========================입퇴장메세지=========================//
+
+
+//=========================봇 ON 로그=========================//
 client.on('ready', () => {
-  console.log('켰다.');
+  console.log('과학이 상태 ON!');
 });
+//=========================봇 ON 로그=========================//
 
+
+//=========================입장역할지급=========================//
 client.on("guildMemberAdd", (member) => {
   const guild = member.guild;
   const newUser = member.user;
@@ -17,7 +28,7 @@ client.on("guildMemberAdd", (member) => {
 
   welcomeChannel.send(`<@${newUser.id}> ${welcomeChannelComment}\n`);
 
-  member.addRole(guild.roles.find(role => role.name == "게스트"));
+  member.addRole(guild.roles.find(role => role.name == "인증되지않음"));   //지급할 역할 이름
 });
 
 client.on("guildMemberRemove", (member) => {
@@ -27,13 +38,17 @@ client.on("guildMemberRemove", (member) => {
 
   byeChannel.send(`<@${deleteUser.id}> ${byeChannelComment}\n`);
 });
+//=========================입장역할지급=========================//
 
+
+//=========================단순자동응답=========================//
 client.on('message', (message) => {
   if(message.author.bot) return;
 
   if(message.content == 'ping') {
     return message.reply('pong');
   }
+//=========================단순자동응답=========================//
 
   if(message.content == 'embed') {
     let img = 'https://cdn.discordapp.com/icons/419671192857739264/6dccc22df4cb0051b50548627f36c09b.webp?size=256';
