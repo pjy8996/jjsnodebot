@@ -373,12 +373,19 @@ function checkPermission(message) {
       .catch(error => console.log(error))
   }  
 
-
-  let muterole = member.guild.roles.find(r => r.name == "Muted");
-  let isMuted = member._roles.find(x => x == muterole.id);
-  if(isMuted) {
-      member.ban('뮤트역할을 받은채 서버퇴장으로 차단되었습니다')
-      banAlertChannel.send(`${member.user}님이 ${muterole}역할을 받은채 서버퇴장으로 차단되었습니다`);
+  if(message.content.startsWith("!뮤트")) {
+    if(message.member.hasPermission("MANAGE_MESSAGE")) { // 메세지 관리 권한
+      let user = message.mentions.members.first()
+      let mute = message.guild.roles.find(r => r.id === 'Muted')
+      if(!user) return message.reply("!뮤트 @멘션")
+      user.addRole(mute).then(member => {
+        message.channel.send(`${member.displayName} 에게 뮤트를 먹였습니다.`)
+      }).catch(() => {
+        message.channel.send(`역할을 지급하지 못했습니다.`)
+      })
+    } else { 
+      message.reply("권한이 없습니다.") 
+    } 
   }
   
   client.login(token);
