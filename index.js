@@ -13,12 +13,32 @@ const byeChannelComment = "**님 안녕히 가세요.. 다음에 또뵈요!**"; 
 //=========================입퇴장메세지=========================//
 
 
-//=========================봇 ON 로그=========================//
 client.on('ready', () => {
   console.log('과학이 상태 ON!');
-});
-//=========================봇 ON 로그=========================//
+  client.user.setPresence({ game: { name: '과학서버봇 과학이!' }, status: 'online' })
 
+  let state_list = [
+    '과학서버봇 과학이!',
+    '규칙을 숙지해주세요!',
+    '오늘도 좋은 하루~',
+  ]
+  let state_list_index = 1;
+  let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
+
+  function changeState() {
+    setTimeout(() => {
+      // console.log( '상태 변경 -> ', state_list[state_list_index] );
+      client.user.setPresence({ game: { name: state_list[state_list_index] }, status: 'online' })
+      state_list_index += 1;
+      if(state_list_index >= state_list.length) {
+        state_list_index = 0;
+      }
+      changeState()
+    }, change_delay);
+  }
+
+  // changeState();
+});
 
 //=========================입장역할지급=========================//
 client.on("guildMemberAdd", (member) => {
