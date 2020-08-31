@@ -15,7 +15,7 @@ const byeChannelComment = "**님 안녕히 가세요.. 다음에 또뵈요!**"; 
 
 client.on('ready', () => {
   console.log('과학이 상태 ON!');
-  client.user.setPresence({ game: { name: '과학서버봇 과학이!' }, status: 'online' })
+  client.user.setPresence({ game: { name: 'minitop BOT' }, status: 'online' })
 
   let state_list = [
     '과학서버봇 과학이!',
@@ -242,7 +242,7 @@ client.on('message', (message) => {
       } 
     }
 
-  } else if(message.content.startsWith('!강퇴')) {
+  } else if(message.content.startsWith('!킥')) {
     if(message.channel.type == 'dm') {
       return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
     }
