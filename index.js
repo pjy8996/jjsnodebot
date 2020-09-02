@@ -60,7 +60,7 @@ client.on('message', (message) => {
   }
 
   if(message.content == '과학아 문상') {
-    return message.reply('__문화상품권 후원__\n레온하트 DM으로 핀번호를 보내주시면\n최대한 빨리 확인후 처리해드립니당!');
+    return message.reply('__문화상품권 후원__\n<@528133774039449610> DM으로 핀번호를 보내주시면\n최대한 빨리 확인후 처리해드립니당!');
   }
   if(message.content == '과학아 계좌') {
     return message.reply('__계좌 후원__\n352 - 1643 - 5238 - 53 박준용 으로 송금해주신 후\n곰용DM으로 예금주명을 보내주시면\n빠른확인후 처리해드립니당!');
