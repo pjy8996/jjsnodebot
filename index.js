@@ -15,8 +15,6 @@ const byeChannelComment = "**님 안녕히 가세요.. 다음에 또뵈요!**"; 
 
 client.on('ready', () => {
   console.log('과학이 상태 ON!');
-  client.user.setPresence({ game: { name: 'minitop BOT' }, status: 'online' })
-
   // changeState();
 });
 
